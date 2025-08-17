@@ -59,3 +59,16 @@ Resources:
       LoginProfile:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
+
+Outputs:
+  TempPasswordSecretARN:
+    Description: ARN of the Secrets Manager secret with the temporary password
+    Value: !Ref IAMTempPasswordSecret
+
+  S3UserConsole:
+    Description: s3 user use account-specific sign-in URL
+    Value: !Sub "https://${AWS::AccountId}.signin.aws.amazon.com/console"
+
+  EC2UserConsole:
+    Description: ec2 user account-specific sign-in URL
+    Value: !Sub "https://${AWS::AccountId}.signin.aws.amazon.com/console"
