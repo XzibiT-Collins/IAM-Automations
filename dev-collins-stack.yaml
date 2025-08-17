@@ -44,7 +44,7 @@ Resources:
     Properties:
       UserName: s3-user-collins
       Groups:
-        - !Ref dev-collins-S3Group
+        - !Ref S3Group
       LoginProfile:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
@@ -55,7 +55,7 @@ Resources:
     Properties:
       UserName: ec2-user-collins
       Groups:
-        - !Ref dev-collins-EC2Group
+        - !Ref EC2Group
       LoginProfile:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
