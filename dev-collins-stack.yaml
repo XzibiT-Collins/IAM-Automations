@@ -29,6 +29,7 @@ Resources:
       GroupName: dev-collins-S3Group
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
 
   # IAM Group for EC2
   EC2Group:
@@ -37,6 +38,7 @@ Resources:
       GroupName: dev-collins-EC2Group
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
 
   # s3-user IAM user
   S3User:
