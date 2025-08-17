@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  IAM Automation Lab: Creates IAM Users, Groups, Permissions, and stores a temporary password in Secrets Manager.
+
+Parameters:
+  InitialPassword:
+    Type: String
+    Description: Temporary password for IAM users
+    NoEcho: true
+    Default: '{{resolve:secretsmanager:IAMTempPassword:SecretString:password}}'
+
+Resources:
+
+  # Secrets Manager Secret
+  IAMTempPasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: IAMTempPassword
+      Description: Temporary password for IAM users
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "placeholder"}'
+        GenerateStringKey: password
+        PasswordLength: 16
+
+  # IAM Group for S3
+  S3Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: S3Group
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+
+  # IAM Group for EC2
+  EC2Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: EC2Group
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
+
+  # s3-user IAM user
+  S3User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: s3-user-collins
+      Groups:
+        - !Ref S3Group
+      LoginProfile:
+        Password: !Ref InitialPassword
+        PasswordResetRequired: true
+
+  # ec2-user IAM user
+  EC2User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user-collins
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: !Ref InitialPassword
+        PasswordResetRequired: true
