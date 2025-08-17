@@ -26,7 +26,7 @@ Resources:
   S3Group:
     Type: AWS::IAM::Group
     Properties:
-      GroupName: S3Group
+      GroupName: dev-collins-S3Group
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
 
@@ -34,7 +34,7 @@ Resources:
   EC2Group:
     Type: AWS::IAM::Group
     Properties:
-      GroupName: EC2Group
+      GroupName: dev-collins-EC2Group
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess
 
@@ -44,7 +44,7 @@ Resources:
     Properties:
       UserName: s3-user-collins
       Groups:
-        - !Ref S3Group
+        - !Ref dev-collins-S3Group
       LoginProfile:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
@@ -55,7 +55,7 @@ Resources:
     Properties:
       UserName: ec2-user-collins
       Groups:
-        - !Ref EC2Group
+        - !Ref dev-collins-EC2Group
       LoginProfile:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
