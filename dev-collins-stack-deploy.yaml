@@ -1,3 +1,4 @@
 template-file-path: dev-collins-stack.yaml
 parameters: {}
-tags: {}
+tags:
+  name: dev_collins
