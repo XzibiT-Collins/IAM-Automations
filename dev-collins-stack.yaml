@@ -7,7 +7,7 @@ Parameters:
     Type: String
     Description: Temporary password for IAM users
     NoEcho: true
-    Default: '{{resolve:secretsmanager:IAMTempPassword:SecretString:password}}'
+    Default: '{{resolve:secretsmanager:IAMTemporaryPassword:SecretString:password}}'
 
 Resources:
 
@@ -15,7 +15,7 @@ Resources:
   IAMTempPasswordSecret:
     Type: AWS::SecretsManager::Secret
     Properties:
-      Name: IAMTempPassword
+      Name: IAMTemporaryPassword
       Description: Temporary password for IAM users
       GenerateSecretString:
         SecretStringTemplate: '{"username": "placeholder"}'
