@@ -62,6 +62,16 @@ Resources:
         Password: !Ref InitialPassword
         PasswordResetRequired: true
 
+  EC2TestUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user-test-collins
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: !Ref InitialPassword
+        PasswordResetRequired: true
+
 Outputs:
   TempPasswordSecretARN:
     Description: ARN of the Secrets Manager secret with the temporary password
